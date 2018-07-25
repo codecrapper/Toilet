@@ -98,17 +98,17 @@ const constructBoosts = () => {
 		createButton.classList.add("btn-sm");
 		createButton.classList.add("btn-outline-success");
 		createButton.innerText = "Purchase";
-				//createButton.classList.add("btn btn-success");
+		
 		item.innerText = incomeBoosts[i].title + ": $" + incomeBoosts[i].cost + " (Increase hourly income by $" + incomeBoosts[i].increase + ") ";
+		
 		createButton.onclick = function() {
 			if(userData.cash >= incomeBoosts[i].cost) {
 				userData.cash -= incomeBoosts[i].cost;
 				userData.hourlyIncome += incomeBoosts[i].increase;
 				constructIncome();
-			} else {
-				alert("you cant afford it mate");
-			}
+			} 
 		}
+
 		item.appendChild(createButton);
 		list.appendChild(item);
 	}
