@@ -11,7 +11,25 @@ var userData = {
 	cash: 100,
 	hourlyIncome: 1,
 	inventory: {}
-}
+};
+
+var incomeBoosts = [
+	{
+		title: "College Course",
+		cost: 50,
+		increase: 2
+	},
+	{
+		title: "Watch a Youtube Stream",
+		cost: 100,
+		increase: 5
+	},
+	{
+		title: "Goto Ted Talk",
+		cost: 250,
+		increase: 10
+	}
+];
 
 // Income functions
 const addHourlyIncome = () => {
@@ -65,8 +83,18 @@ const constructTimeSection = () => {
 
 const constructIncome = () => {
 	let incomeSection = document.getElementById("user-income");
-	let incomeMessage = "Cash: $" + userData.cash;
+	let incomeMessage = "Cash: $" + userData.cash + " Hourly Income: $" + userData.hourlyIncome;
 	incomeSection.innerText = incomeMessage;
 }
 
+const constructBoosts = () => {
+	let list = document.getElementById("powerup-options");
+	for(let i = 0; i < incomeBoosts.length; i++) {
+		let item = document.createElement("li");
+		item.innerText = incomeBoosts[i].title;
+		list.appendChild(item);
+	}
+}
+
+constructBoosts();
 
