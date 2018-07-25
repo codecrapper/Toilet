@@ -91,7 +91,15 @@ const constructBoosts = () => {
 	let list = document.getElementById("powerup-options");
 	for(let i = 0; i < incomeBoosts.length; i++) {
 		let item = document.createElement("li");
-		item.innerText = incomeBoosts[i].title;
+		item.innerText = incomeBoosts[i].title + ": $" + incomeBoosts[i].cost + " (Increase hourly income by $" + incomeBoosts[i].increase + ")";
+		item.onclick = function() {
+			if(userData.cash >= incomeBoosts[i].cost) {
+				userData.cash -= incomeBoosts[i].cost;
+				userData.hourlyIncome += incomeBoosts[i].increase;
+			} else {
+				alert("you cant afford it mate");
+			}
+		}
 		list.appendChild(item);
 	}
 }
