@@ -28,7 +28,8 @@ var incomeBoosts = [
 		title: "Goto Ted Talk",
 		cost: 250,
 		increase: 10
-	}
+	},
+
 ];
 
 // Income functions
@@ -91,15 +92,24 @@ const constructBoosts = () => {
 	let list = document.getElementById("powerup-options");
 	for(let i = 0; i < incomeBoosts.length; i++) {
 		let item = document.createElement("li");
-		item.innerText = incomeBoosts[i].title + ": $" + incomeBoosts[i].cost + " (Increase hourly income by $" + incomeBoosts[i].increase + ")";
-		item.onclick = function() {
+		item.classList.add("mb-3")
+		let createButton = document.createElement("button");
+		createButton.setAttribute("type", "button");
+		createButton.classList.add("btn-sm");
+		createButton.classList.add("btn-outline-success");
+		createButton.innerText = "Purchase";
+				//createButton.classList.add("btn btn-success");
+		item.innerText = incomeBoosts[i].title + ": $" + incomeBoosts[i].cost + " (Increase hourly income by $" + incomeBoosts[i].increase + ") ";
+		createButton.onclick = function() {
 			if(userData.cash >= incomeBoosts[i].cost) {
 				userData.cash -= incomeBoosts[i].cost;
 				userData.hourlyIncome += incomeBoosts[i].increase;
+				constructIncome();
 			} else {
 				alert("you cant afford it mate");
 			}
 		}
+		item.appendChild(createButton);
 		list.appendChild(item);
 	}
 }
