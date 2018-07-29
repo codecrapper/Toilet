@@ -18,8 +18,8 @@
 	height: 50px;
 	width: 50px;
 	position: absolute;
-	top: 100px;
-	left: 575px;
+	top: ;
+	left: ;
 }
 
 #missileContainer {
@@ -29,10 +29,16 @@
 }
 
 .missile {
-	background-image: url('assets/missile2.png');
+	background-image: url('assets/missile1.png');
 	height: 16px;
 	width: 10px;
 	top: ;
 	left: ;
+	position: absolute;
+}
+
+#enemyContainer {
+	height: 800px;
+	width: 1200px;
 	position: absolute;
 }

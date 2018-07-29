@@ -12,6 +12,25 @@ const hero = {
 
 const missilesPos = [];
 
+const enemies = [
+            { left: 200, top: 100 },
+            { left: 300, top: 100 },
+            { left: 400, top: 100 },
+            { left: 500, top: 100 },
+            { left: 600, top: 100 },
+            { left: 700, top: 100 },
+            { left: 800, top: 100 },
+            { left: 900, top: 100 },
+            { left: 200, top: 175 },
+            { left: 300, top: 175 },
+            { left: 400, top: 175 },
+            { left: 500, top: 175 },
+            { left: 600, top: 175 },
+            { left: 700, top: 175 },
+            { left: 800, top: 175 },
+            { left: 900, top: 175 }
+        ];
+
 //document.querySelector(".missile").style.visibility = "hidden";
 
 // LEFT and RIGHT keys moves the hero
@@ -64,7 +83,7 @@ const moveHero = () => {
 // 	}
 // }
 
-const drawMissile = () => {
+function drawMissile() {
 	document.getElementById("missileContainer").innerHTML = "";
 	for(let i = 0; i < missilesPos.length; i++) {
 	document.getElementById("missileContainer").innerHTML += 
@@ -73,4 +92,33 @@ const drawMissile = () => {
 	}
 }
 
+function moveMissile() {
+	for(let i = 0; i < missilesPos.length; i++) {
+		missilesPos[i].top = missilesPos[i].top - 5;
+	}
+}
 
+function drawEnemies() {
+	document.getElementById("enemyContainer").innerHTML = "";
+	for(let i = 0; i < enemies.length; i++) {
+	document.getElementById("enemyContainer").innerHTML += 
+	`<div class='enemy' style='left:${enemies[i].left}px; top:${enemies[i].top}px'></div>`;
+	}
+}
+
+function moveEnemies() {
+	for(let i = 0; i < enemies.length; i++) {
+		enemies[i].top = enemies[i].top + 2;
+	}
+}
+
+function gameLoop() {
+	setTimeout(gameLoop, 100);
+	moveMissile();
+	drawMissile();
+	drawEnemies();
+	moveEnemies();
+	
+}
+
+gameLoop();
