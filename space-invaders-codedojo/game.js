@@ -45,22 +45,14 @@ document.onkeydown = function(event) {
 		hero.left += 10;
 		moveHero();
 	} else if(event.keyCode === 32) {
-		let heroTopPos = hero.top;
-		let heroLeftPos = hero.left;
 		let missile = {
-			top: heroTopPos,
-			left: heroLeftPos
+			left: hero.left,
+			top: hero.top
 		}
 		missilesPos.push(missile);
-		console.log(missilesPos);
-
-		// for(let i = 0; i < missilesPos.length; i++) {
-		// 	document.querySelector(".missile").style.top = (missilesPos[i].top - 16) + "px";
-		// 	document.querySelector(".missile").style.left = (missilesPos[i].left + 20) + "px";
-		// }
-		//document.querySelector(".missile").style.visibility = "visible";
 		drawMissile();
 	}
+	drawHero();
 }
 
 const moveHero = () => {
@@ -112,12 +104,29 @@ function moveEnemies() {
 	}
 }
 
+function collisionDetection() {
+	for(var enemy = 0; enemy < enemies.length; enemy++) {
+		for(var missile = 0; missile < missilesPos.length; missile++) {
+			if(
+				missilesPos[missile].left >= enemies[enemy].left  &&
+                missilesPos[missile].left <= (enemies[enemy].left + 50)  &&
+                missilesPos[missile].top <= (enemies[enemy].top + 50)  &&
+                missilesPos[missile].top >= enemies[enemy].top
+				) {
+				enemies.splice(enemy, 1)
+			missilesPos.splice(missile, 1)
+			} 
+		}
+	}
+}
+
 function gameLoop() {
 	setTimeout(gameLoop, 100);
 	moveMissile();
 	drawMissile();
-	drawEnemies();
 	moveEnemies();
+	drawEnemies();
+	collisionDetection();
 	
 }
 
