@@ -1,0 +1,80 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>Roll Dice</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+</head>
+
+<body>
+
+  <div class="container">
+      <div class="row">
+        
+        <div class="col-sm-6">
+          <div class="card text-center">
+            <div class="card-body">
+              <h1 class="card-title">DICE 1</h1>
+              <h3 id="dice1">0</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="card text-center">
+            <div class="card-body">
+              <h1 class="card-title">DICE 2</h1>
+              <h3 id="dice2">0</h3>
+            </div> 
+          </div>
+        </div>
+
+       </div>
+
+     </br></br>
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <button id="rollButton" type="button" class="btn btn-lg btn-outline-success">ROLL DICE</button>
+      </div>
+    </div>
+
+    </br></br>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="breadcrumb">
+          <h1 id="rollTotal"></h1>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- /container -->
+
+
+<script>
+
+const rollButton = document.getElementById("rollButton");
+const dice1 = document.getElementById("dice1");
+const dice2 = document.getElementById("dice2");
+const rollTotal = document.getElementById("rollTotal");
+
+
+const rollDice = () => {
+  let dice1Num = dice1.innerHTML = Math.floor(Math.random() * 6) + 1;
+  let dice2Num = dice2.innerHTML = Math.floor(Math.random() * 6) + 1;
+
+  rollTotal.innerHTML = `YOU HAVE ROLLED: ${(dice1Num + dice2Num)}`;
+}
+
+rollButton.addEventListener("click", rollDice)
+
+
+
+
+
+</script>
+</body>
+</html>
