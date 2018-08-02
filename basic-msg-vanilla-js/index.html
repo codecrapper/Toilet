@@ -1,0 +1,118 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>My Library</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="card text-center">
+
+        <div class="card-header">
+          <h1>PASS YOUR MESSAGE APP</h1>
+        </div>
+
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                  <textarea class="form-control" id="messageOutput" rows="3" placeholder="Your delivered message" readonly></textarea>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" id="messageInput" rows="3" placeholder="Message you want to send"></textarea>
+                </div>
+            </form>
+        </div>
+
+        <div>
+          <button id="sendButton" type="button" class="btn btn-primary btn-lg btn-block">Send message</button>
+          <button id="deleteButton" type="button" class="btn btn-secondary btn-lg btn-block">Clear/new message</button>
+        </div>
+
+    </div>
+
+  </br></br>
+
+    <div class="card text-center">
+
+        <div class="card-header">
+          <h1>YOUR SENT MESSAGES</h1>
+        </div>
+
+        <div class="card-body">
+            <div id="messageHistory"></div>
+        </div>
+
+        <button id="clearHistory" type="button" class="btn btn-danger btn-lg btn-block">Clear history</button>
+
+    </div>
+
+  </div> <!-- /container -->
+
+<script type = "text/javascript">
+
+  const messageInput = document.getElementById("messageInput")
+  const messageOutput = document.getElementById("messageOutput")
+  const sendButton = document.getElementById("sendButton");
+  const deleteButton = document.getElementById("deleteButton");
+  const clearHistory = document.getElementById("clearHistory");
+  const messageHistory = document.getElementById("messageHistory");
+
+  const view = {
+    history: function() {
+      let historyLog = document.createElement("div");
+      historyLog.innerHTML = messageInput.value + " @ " + Date();
+      messageHistory.appendChild(historyLog)
+    },
+    deleteMessage: function() {
+      messageInput.value=""
+      messageOutput.innerHTML = "";
+    },
+    wipeHistory: function() {
+      messageHistory.innerHTML = "";
+    }
+  }
+
+  const handler = {
+    sendMessage: function() {
+      let msgInput = messageInput.value;
+      messageOutput.innerHTML = msgInput;
+
+      view.history();
+
+      messageInput.value = "";
+    }
+  }
+
+  // const sendMessage = () => {
+  //   let msgInput = messageInput.value;
+  //   messageOutput.innerHTML = msgInput;
+
+  //   view.history();
+
+  //   messageInput.value = "";
+  // }
+
+  // const deleteMessage = () => {
+  //   messageInput.value=""
+  //   messageOutput.innerHTML = "";
+  // }
+
+  // const wipeHistory = () => {
+  //   messageHistory.innerHTML = "";
+  // }
+
+  sendButton.addEventListener('click', handler.sendMessage);
+  deleteButton.addEventListener('click', view.deleteMessage);
+  clearHistory.addEventListener('click', view.wipeHistory);
+
+
+</script>
+</body>
+</html>
