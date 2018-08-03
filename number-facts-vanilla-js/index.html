@@ -1,0 +1,85 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>Number Facts</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+      #fact {
+        display: none;
+      }
+    </style>
+
+</head>
+
+<body class="bg-dark">
+
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-6 offset-md-3">
+        <div class="card bg-primary text-white mt-3 p-4">
+          <h2>Number Facts</h2>
+          <p>Enter a number, get a random fact</p>
+            <input id="numberInput" type="number" class="form-control-lg mb-2" placeholder="Enter any number">
+          <div id="fact">
+            <h4 class="card-title">Number Fact</h4>
+            <p id="factText" class="card-text"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- /container -->
+
+<script>
+  const fact = document.querySelector("#fact");
+  const factText = document.querySelector("#factText");
+  const numberInput = document.getElementById("numberInput");
+
+  /* -------- GET API WITH AJAX && XHR -----------*/
+
+  const getFactAjax = () => {
+    let number = numberInput.value;
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'http://numbersapi.com/'+number);
+
+    xhr.onload = function() {
+      if(xhr.status == 200 && number!='') {
+        fact.style.display = "block";
+        factText.textContent = this.responseText;
+        //console.log(factText);
+      } else if(number==='') {
+        fact.style.display = "none";
+      }
+    }
+
+    xhr.send();
+  }
+
+  /*--------- USE FETCH API -------- */
+
+  // const getFactFetch = () => {
+  //   let number = numberInput.value;
+
+  //   fetch('http://numbersapi.com/'+number)
+  //     .then(response => response.text())
+  //     .then(data => {
+  //       if(number!='') {
+  //         fact.style.display = "block";
+  //         factText.textContent = data;
+  //       }
+  //     })
+  //     .catch(err => console.log(err))
+  // }
+
+  numberInput.addEventListener("input", getFactAjax)
+
+
+
+</script>
+</body>
+</html>
